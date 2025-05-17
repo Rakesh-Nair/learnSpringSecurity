@@ -16,5 +16,5 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`)
 );
 
-INSERT  INTO `customer` (`email`, `pwd`, `role`) VALUES ('happy@example.com', '{noop}EazyBytes@12345', 'read');
-INSERT  INTO `customer` (`email`, `pwd`, `role`) VALUES ('admin@example.com', '{bcrypt}$2a$12$88.f6upbBvy0okEa7OfHFuorV29qeK.sVbB9VQ6J6dWM1bW6Qef8m', 'admin');
+INSERT  INTO `customer` (`email`, `pwd`, `role`) VALUES ('user@example.com', '{noop}EazyBytes@12345', 'read');
+INSERT  INTO `customer` (`email`, `pwd`, `role`) VALUES ('admin@example.com', '{bcrypt}$2a$12$AsO2XYAnOAUCyKxNWwLhqei6xedU/bifptJH1EFXrv/icf9j5XeWy', 'admin');
