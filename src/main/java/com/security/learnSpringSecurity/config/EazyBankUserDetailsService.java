@@ -1,4 +1,4 @@
-package com.security.learnSpringSecurity.service;
+package com.security.learnSpringSecurity.config;
 
 import com.security.learnSpringSecurity.model.Customer;
 import com.security.learnSpringSecurity.repository.CustomerRepository;
