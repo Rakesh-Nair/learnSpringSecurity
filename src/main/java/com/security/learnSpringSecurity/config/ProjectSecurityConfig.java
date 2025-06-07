@@ -26,7 +26,8 @@ public class ProjectSecurityConfig  {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable());
+        http.requiresChannel(rrc -> rrc.anyRequest().requiresInsecure()).
+                csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests((requests) -> requests.
                 requestMatchers("/myAccount","/myBalance","/myCards","/myLoans").authenticated()
                 .requestMatchers("/notices","/contact","/error","/register").permitAll());
