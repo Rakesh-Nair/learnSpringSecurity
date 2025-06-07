@@ -14,9 +14,9 @@ import org.springframework.stereotype.Controller;
 
 
 @Controller
-@Profile("!prod")
+@Profile("prod")
 @RequiredArgsConstructor
-public class EazyBankUsernamePwdAuthenticationProvider implements AuthenticationProvider {
+public class EazyBankUsernamePwdProdAuthenticationProvider implements AuthenticationProvider {
 
     private final UserDetailsService userDetailsService;
 
@@ -27,7 +27,15 @@ public class EazyBankUsernamePwdAuthenticationProvider implements Authentication
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
         UserDetails user = userDetailsService.loadUserByUsername(username);
-        return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
+
+        if(passwordEncoder.matches(password, user.getPassword())){
+            //Logic to fetch age details and perform validation check
+            return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
+        }
+        else{
+            throw new BadCredentialsException("Invalid Password");
+        }
+
     }
 
     @Override
