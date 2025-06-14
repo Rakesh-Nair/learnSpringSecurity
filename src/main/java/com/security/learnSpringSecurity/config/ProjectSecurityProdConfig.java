@@ -1,5 +1,6 @@
 package com.security.learnSpringSecurity.config;
 
+import com.security.learnSpringSecurity.security.CustomAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -24,7 +25,7 @@ public class ProjectSecurityProdConfig {
                 requestMatchers("/myAccount","/myBalance","/myCards","/myLoans").authenticated()
                 .requestMatchers("/notices","/contact","/error","/register").permitAll());
         http.formLogin(withDefaults());
-        http.httpBasic(withDefaults());
+        http.httpBasic(cae -> cae.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
         return http.build();
     }
 
