@@ -1,5 +1,6 @@
 package com.security.learnSpringSecurity.config;
 
+import com.security.learnSpringSecurity.security.CustomAccessDeniedHandler;
 import com.security.learnSpringSecurity.security.CustomAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +35,7 @@ public class ProjectSecurityConfig  {
                 .requestMatchers("/notices","/contact","/error","/register").permitAll());
         http.formLogin(withDefaults());
         http.httpBasic(cae -> cae.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
+        http.exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()).accessDeniedPage("/denied"));
         return http.build();
     }
 
