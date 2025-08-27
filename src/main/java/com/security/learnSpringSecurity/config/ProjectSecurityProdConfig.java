@@ -20,12 +20,12 @@ public class ProjectSecurityProdConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.sessionManagement(smc -> smc.invalidSessionUrl("/invalidSession").maximumSessions(1).maxSessionsPreventsLogin(true))
+        http.sessionManagement(smc -> smc.invalidSessionUrl("/invalidSession").maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/expired"))
                 .requiresChannel(rrc -> rrc.anyRequest().requiresSecure()).
                 csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests((requests) -> requests.
                 requestMatchers("/myAccount","/myBalance","/myCards","/myLoans").authenticated()
-                .requestMatchers("/notices","/contact","/error","/register","/invalidSession").permitAll());
+                .requestMatchers("/notices","/contact","/error","/register","/invalidSession","/expired").permitAll());
         http.formLogin(withDefaults());
         http.httpBasic(cae -> cae.authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
         http.exceptionHandling(ehc -> ehc.accessDeniedHandler(new CustomAccessDeniedHandler()).accessDeniedPage("/denied"));
